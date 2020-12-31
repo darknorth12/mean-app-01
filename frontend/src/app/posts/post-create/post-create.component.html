@@ -1,0 +1,47 @@
+<p>Create Post</p>
+<form class="card" [formGroup]="enteredPost" (submit)="onSubmitPost()">
+  <div class="form-control">
+    <input
+      [ngClass]="{
+        'red-border':
+          enteredPost.get('title').invalid &&
+          (enteredPost.get('title').dirty || enteredPost.get('title').touched)
+      }"
+      placeholder="Post Title*"
+      formControlName="title"
+    />
+  </div>
+  <small
+    class="text-danger"
+    *ngIf="
+      enteredPost.get('title').invalid &&
+      (enteredPost.get('title').dirty || enteredPost.get('title').touched)
+    "
+    >This field is required</small
+  >
+  <div class="form-control">
+    <textarea
+      [ngClass]="{
+        'red-border':
+          enteredPost.get('content').invalid &&
+          (enteredPost.get('content').dirty ||
+            enteredPost.get('content').touched)
+      }"
+      rows="6"
+      formControlName="content"
+      placeholder="Post Content*"
+    ></textarea>
+  </div>
+  <small
+    class="text-danger"
+    *ngIf="
+      enteredPost.get('content').invalid &&
+      (enteredPost.get('content').dirty || enteredPost.get('content').touched)
+    "
+  >
+    This field is required
+  </small>
+  <button class="submit-buttons" [disabled]="enteredPost.invalid">
+    Submit Post
+  </button>
+</form>
